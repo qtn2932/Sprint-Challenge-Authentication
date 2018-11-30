@@ -10,17 +10,20 @@ module.exports = server => {
   server.post('/api/login', login);
   server.get('/api/jokes', authenticate, getJokes);
 };
-function generateToken(user){
-  const payload={
+function generateToken(user) {
+  const payload = {
     subject: user.id,
     username: user.username
   };
-  const secret=jwtKey;
-  const options={
-    expiresIn:'1h',
+
+  const secret = jwtKey;
+  const options = {
+    expiresIn: '1h',
   };
-  return jwt.sign(payload,secret,options);
+
+  return jwt.sign(payload, secret, options);
 }
+
 function register(req, res) {
   // implement user registration
   const creds= req.body;
